@@ -1,0 +1,101 @@
+[user]
+  name = "Cool4ZBL"
+  email = "i@zhangbinliu.me"
+
+[alias]
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  co = checkout
+  br = branch
+  unstage = reset HEAD --
+  last = log -1 HEAD
+  visual = !gitk
+  dsf = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX; }; f"
+  recap = "log --all --oneline --no-merges --author=i@zhangbinliu.me"
+  today = "log --since=00:00:00 --all --no-merges --oneline --author=i@zhangbinliu.me"
+
+[core]
+  editor = /usr/local/bin/vim
+
+  trustctime = false
+
+    # Treat spaces before tabs and all kinds of trailing whitespace as an error
+    # [default] trailing-space: looks for spaces at the end of a line
+    # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+    # Prevent showing files whose names contain non-ASCII symbols as unversioned.
+    # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+  precomposeunicode = false
+  excludesfile = /Users/zhangbinliu/.global_ignore
+  pager = diff-so-fancy | less --tabs=4 -RFX
+
+[credential]
+  helper = cache --timeout=7200
+
+[diff]
+  renames = copies
+  tool = vimdiff
+
+[diff "bin"]
+    # Use `hexdump` to diff binary files
+  textconv = hexdump -v -C
+
+[color]
+  ui = auto
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+[color "diff"]
+  commit = green
+  meta = yellow
+  frag = cyan
+  old = red
+  new = green
+  whitespace = red reverse
+
+[filter "media"]
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
+
+[help]
+  autocorrect = 1
+
+[http]
+  proxy = sock5://127.0.0.1:1080
+  postBuffer = 524288000
+
+[https]
+  proxy = sock5://127.0.0.1:1080
+
+# URL shorthands
+# douban intra
+[url "git@github.intra.douban.com:"]
+  insteadOf = "gh:"
+  pushInsteadOf = "github:"
+  insteadOf = "https://github.intra.douban.com/"
+  insteadOf = "http://github.intra.douban.com/"
+
+# Fix `https` protocol too slow for GFW
+[url "git@github.com:"]
+  insteadOf = "gh:"
+  pushInsteadOf = "github:"
+  insteadOf = "git://github.com/"
+  insteadOf = "https://github.com/"
+
+[url "git@gist.github.com:"]
+  insteadOf = "gst:"
+  pushInsteadOf = "gist:"
+  pushInsteadOf = "git://gist.github.com/"
+
+[url "git://gist.github.com/"]
+  insteadOf = "gist:"
+
+[web]
+  browser = chrome
+
+[browser "chrome"]
+  cmd = open -a \"google chrome.app\"
+
+[github]
+  user = cool4zbl
