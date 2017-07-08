@@ -1,6 +1,6 @@
 # Z-Dotfiles
 
-Hi, there are my dotfiles, tmux config, zsh config, vim config, etc...
+Hi, there are my dotfiles, tmux config, zsh config, vim config, iTerm2 config, etc...
 
 ## Preview
 ### My Tmux Dark Theme
@@ -13,6 +13,11 @@ Hi, there are my dotfiles, tmux config, zsh config, vim config, etc...
 
 ![My_Vim_Writer](My_Vim_Writer.png)
 
+
+### TODO:
+- `install.sh | setup.sh`
+- Features
+- Symlink to `$HOME`
 
 
 ## Enjoy your coding. 😆
