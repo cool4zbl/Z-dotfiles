@@ -21,3 +21,5 @@ Hi, there are my dotfiles, tmux config, zsh config, vim config, iTerm2 config, e
 
 
 ## Enjoy your coding. 😆
+
+Thanks to [Mathiasbynes  dotfiles](https://github.com/mathiasbynens/dotfiles/)
