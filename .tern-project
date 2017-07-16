@@ -1,0 +1,15 @@
+{
+  "libs": [
+    "browser",
+    "jquery",
+    "underscore",
+    "ecma6"
+  ],
+  "plugins": {
+    "node": true,
+    "requirejs": {
+      "baseURL": "./",
+      "paths": {}
+    }
+  }
+}

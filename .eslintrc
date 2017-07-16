@@ -1,0 +1,31 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": false
+  },
+  "globals": {
+    "describe": true,
+    "it": true,
+    "before": true,
+    "window": true,
+    "document": true,
+    "Request": true,
+    "fetch": true
+  },
+  "rules": {
+    "no-unused-vars": 0
+  }
+
+}
