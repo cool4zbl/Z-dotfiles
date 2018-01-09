@@ -38,6 +38,9 @@ function mcd() {
   mkdir -p "$1" && cd "$1"
 }
 
+# Open files
+alias typora="open -a /Applications/Typora.app"
+
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
@@ -49,9 +52,18 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
 
+# NPM
+alias set-npmjs="npm config set registry http://registry.npmjs.org"
+alias set-npmtb="npm config set registry http://registry.npmjs.taobao.org"
+alias set-npmmt="npm config set registry http://r.npm.sankuai.com"
+NODE_DIST="http://nodejs.mirrors.mx.sankuai.com/dist/"
+MNPM_REGISTRY="http://r.npm.sankuai.com"
+alias mp="npm --registry=$MNPM_REGISTRY --disturl=$NODE_DIST --userconfig=$HOME/.mnpmrc  --cache=$HOME/.cache/mnpm"
+export npm_config_fse_binary_host_mirror="https://npm.taobao.org/mirrors/fsevents/"
 # nvm
 alias nu6="nvm use v6"
 alias nu7="nvm use v7"
+alias nu8="nvm use v8"
 
 # standard js files
 alias std="standard"
@@ -65,6 +77,7 @@ alias gitconfig="vi ~/.gitconfig"
 alias zshconfig="vi ~/.zshrc"
 alias tmuxconfig="vi ~/.tmux.conf"
 alias vimconfig="vi ~/.vimrc"
+alias eslintrc="vi ~/.eslintrc"
 
 # Tmux
 alias nt="tmux new -s"
@@ -72,8 +85,31 @@ alias ta="tmux a -t"
 alias tl="tmux ls"
 
 # Proxy
-alias gfw="http_proxy=http://127.0.0.1:1080 https_proxy=https://127.0.0.1:1080"
+# alias gfw="http_proxy=http://127.0.0.1:8118 https_proxy=https://127.0.0.1:8118"
 alias gfwoff="unset https_proxy && unset http_proxy"
+function proxy_off(){
+    unset http_proxy
+    unset https_proxy
+    echo -e "已关闭代理"
+}
+function proxy_on() {
+    export no_proxy="localhost,127.0.0.1,localaddress,github.intra.douban.com,"
+    export http_proxy="http://127.0.0.1:1086"
+    export https_proxy=$http_proxy
+    echo -e "已开启代理"
+}
+function start_proxy() {
+    sudo /usr/local/sbin/privoxy /usr/local/etc/privoxy/config
+}
+alias proxyconfig="vim /usr/local/etc/privoxy/config"
+
+function start_pg() {
+    pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+}
+
+function stop_pg() {
+    pg_ctl -D /usr/local/var/postgres stop -s -m fast
+}
 
 # VPS
 alias govps="ssh root@162.243.153.50 -vvv"
@@ -91,6 +127,7 @@ alias dpl="dae pre list"
 alias dpe="dae pre edit -u zhangbinliu --pre"
 
 # Zed-sync
+alias zp="zed-sync --ld -p"
 alias zu="zed-sync -u"
 alias test_zu="node ~/localdev2/zed-sync/index.js -u"
 
@@ -146,7 +183,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export PATH=/usr/local/bin:$PATH
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/bin:/usr/local/bin:$PATH
 export PATH=/Users/zhangbinliu/mongodb/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -170,16 +207,21 @@ export EDITOR='vim'
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# yarn
+export PATH="$PATH:/usr/local/opt/yarn-v0.27.5/bin"
+# export PATH="$PATH:`yarn global bin`"
+
 # ssh
 export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-export PATH=/Users/zhangbinliu/.rvm/gems/ruby-2.2.1/bin:/Users/zhangbinliu/.rvm/gems/ruby-2.2.1@global/bin:/Users/zhangbinliu/.rvm/rubies/ruby-2.2.1/bin:/usr/local/heroku/bin:/usr/local/bin:/Users/zhangbinliu/mongodb/bin:/Users/zhangbinliu/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/zhangbinliu/.rvm/bin:/usr/local/bin
-
 # Add RVM to PATH for scripting
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Go
+export PATH="$PATH:/usr/local/go/bin"
 
 # tmuxinator
 source ~/.tmux/tmuxinator.zsh
@@ -248,7 +290,7 @@ elif type compctl &>/dev/null; then
   compctl -K _npm_completion npm
 fi
 ###-end-npm-completion-###
-
 # Make sure NVM_DIR is the last export
-export NVM_DIR="/Users/zhangbinliu/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# export NVM_DIR="$HOME/.nvm"
