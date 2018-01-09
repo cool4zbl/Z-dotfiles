@@ -3,16 +3,13 @@ filetype off                  " required
 
 call plug#begin('~/.vim/plugged')
 " set the runtime path to include Vundle and initialize
-" set rtp+=~/.vim/bundle/Vundle.vim
-" call vundle#begin()
-" Plug 'gmarik/Vundle.vim'
 
 " ColorScheme
 " OK, Now I just use colors/railscast
 " Plug 'thinkpixellab/flatland', {'rtp': 'Vim/'}
 " Plug 'mhumeSF/one-dark.vim'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
 
 " NERDTree Git Plug
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -34,7 +31,7 @@ let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeWinSize = 26
 
 
-" Vim & tmux auto focus & blur
+" " Vim & tmux auto focus & blur
 Plug 'sjl/vitality.vim'
 
 Plug 'tpope/vim-fugitive'
@@ -55,8 +52,9 @@ let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 0
 
 Plug 'tpope/vim-commentary'
+" Plug 'scrooloose/nerdcommenter'
 
-" CTags
+" " CTags
 Plug 'craigemery/vim-autotag'
 
 " JS editing
@@ -67,12 +65,14 @@ let g:tern_show_signature_in_pum = 1
 autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDefSplit<CR>
 " autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+"
 " Syntax
 Plug 'moll/vim-node'
 Plug 'othree/html5.vim'
 Plug 'mustache/vim-mustache-handlebars'
-" Plug 'mako.vim'
-" Plug 'xml.vim'
+Plug 'posva/vim-vue'
+Plug 'digitaltoad/vim-pug'
+
 " Markdown
 Plug 'godlygeek/tabular'
 " Plug 'plasticboy/vim-markdown'
@@ -136,7 +136,9 @@ let g:user_emmet_settings = {
 " Gist Vim
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
-"
+
+
+
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 " Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -153,6 +155,7 @@ let g:ale_sign_warning = '--'
 nmap <silent> <C-N> <Plug>(ale_previous_wrap)
 nmap <silent> <C-n> <Plug>(ale_next_wrap)
 let g:ale_javascript_eslint_use_global = 1
+let g:ale_javascript_eslint_executable = '~/.nvm/versions/node/v8.0.0/bin/eslint'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -178,7 +181,6 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
-
 Plug 'ervandew/supertab'
 " Vim Snippets Track the engine.
 Plug 'SirVer/ultisnips'
@@ -188,7 +190,7 @@ Plug 'honza/vim-snippets'
 " To use python version 2.x: >
 " let g:UltiSnipsUsePythonVersion = 2
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-
+"
 " indentLines
 Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '┊'
@@ -197,9 +199,6 @@ let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*', 'md', 'json']
 let g:indentLine_leadingSpaceChar = '·'
 " For a better indent, no longer see quote in json.vim, sad.
 " let g:indentLine_setConceal = 0
-
-" Scrolling Screen gently
-" Plug 'yonchu/accelerated-smooth-scroll'
 
 " Search Files
 Plug 'mileszs/ack.vim'
@@ -222,6 +221,7 @@ let g:javascript_enable_domhtmlcss = 1
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
 
+
 " CSS3
 Plug 'hail2u/vim-css3-syntax'
 " Styled-components
@@ -236,11 +236,13 @@ Plug 'ianks/vim-tsx'
 
 " Goyo Write mode
 Plug 'junegunn/goyo.vim'
+" Here END
 " iA write emulator
 Plug 'amix/vim-zenroom2'
 
 " WakaTime
 Plug 'wakatime/vim-wakatime'
+" let g:wakatime_ScreenRedraw = 1
 
 " call vundle#end()            " required
 call plug#end()

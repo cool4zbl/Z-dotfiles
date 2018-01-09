@@ -2,8 +2,7 @@ source ~/.vim/plugin.vim
 
 set nocompatible
 set encoding=utf-8
-
-" colorscheme onedark
+colorscheme onedark
 " colorscheme my_flatland
 " colorscheme papercolor
 colorscheme railscasts
@@ -181,6 +180,7 @@ finally
   redir END
 endtry
 
+inoremap <silent>jj <ESC>
 " shortcuts for :tabn X
 noremap <silent><tab>t :tabnew<cr>
 noremap <silent><tab>x :tabclose<cr>
@@ -198,8 +198,8 @@ noremap <silent><leader>7 :tabn 7<cr>
 noremap <silent><leader>8 :tabn 8<cr>
 noremap <silent><leader>9 :tabn 9<cr>
 noremap <silent><leader>0 :tabn 10<cr>
-noremap <silent><s-tab> :tabnext<CR>
-inoremap <silent><s-tab> <ESC>:tabnext<CR>
+noremap <silent><s-tab> :tabnext<cr>
+inoremap <silent><s-tab> <ESC>:tabnext<cr>
 
 " set terminal and map alt+n or alt+shift+n to "<ESC>]{0}n~"
 if !has('gui_running')
@@ -235,6 +235,10 @@ noremap <leader>W :w !sudo tee % > /dev/null<CR>
 " <leader>q quits the current window
 nnoremap <silent> <leader>q :q<CR>
 inoremap <silent> <leader>q <ESC>:q<CR>
+
+" fix vue syntax highlights
+nnoremap <silent> ff :syntax sync fromstart<CR>
+" let g:vue_disable_pre_processors=1
 
 " <Tab> indents if at the beginning of a line; otherwise does completion
 " function! InsertTabWrapper()
@@ -463,7 +467,9 @@ if has("autocmd")
     autocmd Filetype gitcommit setlocal spell textwidth=72
     " Treat .md files as Markdown
     autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
-
+    " Vue
+    autocmd FileType vue syntax sync fromstart
+    autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
     " Treat .json files as .js
     autocmd BufNewFile,BufRead *.es6 setlocal filetype=javascript
     autocmd BufNewFile,BufRead .babelrc setlocal filetype=json
@@ -479,7 +485,7 @@ endif
 augroup omnifuncs
   autocmd!
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType html,markdown,hbs setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
@@ -525,6 +531,7 @@ call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('hbs', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
