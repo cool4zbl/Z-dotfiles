@@ -1,23 +1,91 @@
-source ~/.vim/plugin.vim
+" source ~/.vim/plugin.vim
+call plug#begin('~/.vim/plugged')
+
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'jiangmiao/auto-pairs'
+
+" Any valid git URL is allowed
+Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+
+" Multiple Plug commands can be written in a single line using | separators
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" On-demand loading
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" Using a non-master branch Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+Plug 'fatih/vim-go', { 'tag': '*' }
+
+" Plugin options
+Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+
+" Plugin outside ~/.vim/plugged with post-update hook
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+Plug 'itchyny/lightline.vim'
+
+Plug 'tpope/vim-repeat'
+Plug 'easymotion/vim-easymotion'
+Plug 'wakatime/vim-wakatime'
+
+" ColorScheme
+Plug 'jacoborus/tender.vim'
+Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
+
+" Initialize plugin system
+
+call plug#end()
 
 set nocompatible
 set encoding=utf-8
-colorscheme onedark
-" colorscheme my_flatland
-" colorscheme papercolor
-colorscheme railscasts
-" colorscheme solarized
+
+" If you have vim >=8.0 or Neovim >= 0.1.5
+if (has("termguicolors"))
+ set termguicolors
+endif
 
 syntax on
 filetype plugin on      " use the file type plugins
 filetype indent on
 
+
+" colorscheme onedark
+" colorscheme papercolor
+" colorscheme railscasts
+" colorscheme solarized
+" colorscheme koehler
+" colorscheme tender
+colorscheme molokai
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+" colorscheme solarized
+
+set guifont=Fira\ Code:h16
+
+
+let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ }
+
 " Have fantastic italic Comment in vim
 " https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/
-highlight Comment cterm=italic
-highlight Keyword cterm=italic
-hi javaScrptFunction guifg=#CC7833 ctermfg=167 cterm=italic
-hi htmlArg guifg=#CC7833 ctermfg=167 cterm=italic
+" highlight Comment cterm=italic
+" highlight Keyword cterm=italic
+" hi javaScrptFunction guifg=#CC7833 ctermfg=167 cterm=italic
+" hi htmlArg guifg=#CC7833 ctermfg=167 cterm=italic
+" let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+" let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 
 " Set nocursorline when FocusLost
 let g:vitality_tmux_can_focus = 1
@@ -35,9 +103,9 @@ set undolevels=1000     " boost undo levels
 " Use system Clipboard
 set clipboard=unnamed
 " Non-tmux-env use clipboard
-if $TMUX == ''
-  set clipboard+=unnamed
-endif
+" if $TMUX == ''
+"   set clipboard+=unnamed
+" endif
 set ai                  " auto indenting
 set ruler               " show the cursor position
 set hlsearch
@@ -52,7 +120,7 @@ set laststatus=2
 " status bar
 " set statusline=%F%m%r%h%w\  "fullpath and status modified sign
 " set statusline+=\ %y "filetype
-set statusline+=\ %{fugitive#statusline()}
+" set statusline+=\ %{fugitive#statusline()}
 " Show the current mode
 set showmode
 " Highlight cursorline
@@ -107,11 +175,6 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 set smarttab
-
-" Joining lines
-if v:version > 703 || v:version == 703 && has("patch541")
-  set formatoptions+=j             " Delete comment char when joining commented lines
-endif
 
 set showcmd
 
@@ -517,6 +580,10 @@ if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
   set t_Co=16
 endif
 
+if !has('gui_running')
+  set t_Co=256
+endif
+
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
   exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
@@ -540,5 +607,6 @@ call NERDTreeHighlightFile('jsx', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('es6', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff','#151515')
 
+let g:NERDTreeNodeDelimiter = "\u00a0"
 
 " vim:set ft=vim et sw=2:

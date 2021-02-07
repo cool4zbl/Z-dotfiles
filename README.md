@@ -16,6 +16,7 @@ Hi, there are my dotfiles, tmux config, zsh config, vim config, iTerm2 config, e
 
 ### TODO:
 - `install.sh | setup.sh`
+- `brew` config
 - Features
 - Symlink to `$HOME`
 

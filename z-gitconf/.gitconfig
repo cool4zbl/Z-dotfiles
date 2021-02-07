@@ -1,6 +1,6 @@
 [user]
-  name = "Cool4ZBL"
-  email = "i@zhangbinliu.me"
+	name = cool4zbl
+	email = i@zhangbinliu.me
 
 [alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
@@ -14,7 +14,7 @@
   today = "log --since=00:00:00 --all --no-merges --oneline --author=i@zhangbinliu.me"
 
 [core]
-  editor = /usr/local/bin/vim
+	editor = vim
 
   trustctime = false
 
@@ -27,6 +27,8 @@
   precomposeunicode = false
   excludesfile = /Users/zhangbinliu/.global_ignore
   pager = diff-so-fancy | less --tabs=4 -RFX
+
+  ; gitproxy = sock5://127.0.0.1:7891
 
 [credential]
   helper = cache --timeout=7200
@@ -62,11 +64,12 @@
   autocorrect = 1
 
 [http]
-  proxy = sock5://127.0.0.1:1080
+	; proxy = socks5://127.0.0.1:7891
   postBuffer = 524288000
 
 [https]
-  proxy = sock5://127.0.0.1:1080
+	; proxy = socks5://127.0.0.1:7891
+  postBuffer = 524288000
 
 # URL shorthands
 # douban intra
@@ -77,11 +80,11 @@
   insteadOf = "http://github.intra.douban.com/"
 
 # Fix `https` protocol too slow for GFW
-[url "git@github.com:"]
-  insteadOf = "gh:"
-  pushInsteadOf = "github:"
-  insteadOf = "git://github.com/"
-  insteadOf = "https://github.com/"
+; [url "git@github.com:"]
+;   insteadOf = "gh:"
+;   pushInsteadOf = "github:"
+;   insteadOf = "git://github.com/"
+;   insteadOf = "https://github.com/"
 
 [url "git@gist.github.com:"]
   insteadOf = "gst:"
@@ -99,3 +102,13 @@
 
 [github]
   user = cool4zbl
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[http "https://github.com"]
+	proxy = socks5://127.0.0.1:7891
+[https "https://github.com"]
+	proxy = socks5://127.0.0.1:7891
+
